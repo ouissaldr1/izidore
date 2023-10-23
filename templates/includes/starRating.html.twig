@@ -1,0 +1,15 @@
+
+<div
+	class="rating">
+	{% set start = 5 %}
+	{% set end = 1 %}
+	{% set step = -0.5 %}
+	{% for i in range(start, end, step) %}
+		<input type="radio" id="star{{i}}" name="rating" value="{{i}}" {% if note == i %} checked {% endif%}/>
+		<label for="star{{i}}" class="{% if i is same as (i|round) %}full{% else %}half{% endif %}" 
+		{% if i <= note%}style="color:#ffd932" {% endif %} ></label>
+	{% endfor %}
+</div>
+
+
+

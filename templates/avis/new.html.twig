@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %} {% block title %}New Avis{% endblock %} {% block
+stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset("assets/css/annonce.css") }}">
+<link rel="stylesheet" href="{{ asset("assets/css/avis.css") }}">
+<link rel="stylesheet" href="{{ asset("assets/css/starRating.css") }}"> {% endblock %}
+{% block javascripts %}
+<script src="{{asset("assets/js/starRating.js")}}" defer></script>
+<script src="{{asset("assets/js/ajouterAvis.js")}}" defer></script>
+
+{% endblock %} {% block body %} {% include 'header.html.twig' %}
+
+<div class="main new-avis">
+  <div style="margin-top:200px"class="container">
+    <div class="avis new">
+      <h2>Page de paiement</h2>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary confirm js-ajouter-avis-button" data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop">
+        Bouton de confirmation d'achat
+      </button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header new">
+            <button type="button" class="btn-close new" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body new">
+            <div class="flex new relative">
+              <span class="underline"></span>
+              <span class="modal-title fs-5">Merci pour votre achat chez Izidore! 😊</span>
+            </div>
+            <form action="{{path('app_avis_new',{'userId':userId})}}" method="POST">
+              <div class="add-review flex">
+                <p>Votre feedback nous guide</p>
+                <p>En évaluant le vendeur, vous nous guidez vers l'excellence.</p>
+                <p>Username</p>
+
+                {% include 'includes/starRating.html.twig' with {'note': 0} %}
+                <p class="error js-error-rating">{{ errorNote }} </p>
+                <textarea placeholder="Partagez votre expérience d'achat..." name="contenu" cols="45"
+                  rows="5"></textarea>
+                <input class="hidden-rating" type="hidden" name="note" />
+
+
+                <p class="appreciation">
+                  Qu'est-ce que vous appréciez le plus ? 💛
+                </p>
+                <div class="avis">
+                  <div class="compl new">
+                    <div class="compl-child">
+                      <img src="{{ asset("assets/images/communicate.png") }}" alt="">
+                      <p>Communication facile</p>
+                      <input type="radio" class="hidden" name="compliment" value="{{compliment[0]}}">
+                    </div>
+                    <div class="compl-child">
+                      <img src="{{ asset("assets/images/pay.jpg") }}" alt="image">
+                      <p>Rapport qualité-prix</p>
+                      <input type="radio" class="hidden" name="compliment" value="{{compliment[1]}}">
+                    </div>
+                    <div class="compl-child">
+                      <img src="{{ asset("assets/images/livraison.png") }}" alt="image">
+                      <p>Rapidité de la livraison</p>
+                      <input type="radio" class="hidden" name="compliment" value="{{compliment[2]}}">
+                    </div>
+                    <div class="compl-child">
+                      <img src="{{ asset("assets/images/quality-check.png") }}" alt="image">
+                      <p>Conformité aux attentes</p>
+                      <input type="radio" class="hidden" name="compliment" value="{{compliment[3]}}">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-footer new">
+                <button type="submit" data-bs-dismiss="modal" class="btn btn-primary confirm">
+                  Donner mon avis
+                </button>
+              </div>
+          </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DefaultController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div  style="margin: 2em auto; max-width: 900px;" class="example-wrapper">
+    <h1 style="  font-size: calc(1.375rem + 1vw)">Page de test de la fonctionnalité d'ajout des avis  ✅</h1>
+    <br>
+    {% if users is not empty %}
+
+        Liste des vendeurs disponibles dans la base de données
+        <br>
+  
+        <div style="padding-left:30px ;margin-top:20px" class="users">
+        <ul >
+            {% for user in users %}
+            {% if 'VENDEUR' in user.getRoles() %}
+                 <li style="margin-bottom:10px">Vendeur {{ user.id }} : {{ user.email }}  <code><a href="{{ path('app_annonce', {'userId': user.id}) }}">Page d'annonce</a></code></li>
+            {% endif %}
+               
+
+            {% endfor %}
+          </ul>
+        <a href="{{ path('app_register') }}" class="btn btn-primary confirm">Créer d'autres</a>
+
+        </div>
+    {% else %}
+        <p>Aucun vendeur n'est disponible.</p>
+        <a href="{{ path('app_register') }}" class="btn btn-primary confirm">Register</a>
+    {% endif %}
+        
+
+   
+</div>
+{% endblock %}
