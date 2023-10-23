@@ -20,7 +20,7 @@ Pour commencer à utiliser l'application, suivez ces étapes :
 Step -1- Cloner le projet en utilisant la commande
 
 ```bash
-  git clone //////
+  git clone https://github.com/ouissaldr1/izidore.git
 ```
 
 Step -2- Accèder au répertoire du projet
